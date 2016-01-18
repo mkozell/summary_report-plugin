@@ -175,6 +175,6 @@ public class ACIPluginPublisher extends Recorder {
 	 * Method that returns the status of the service required.
 	 */
 	public BuildStepMonitor getRequiredMonitorService() {
-		return BuildStepMonitor.BUILD;
+		return BuildStepMonitor.NONE;
 	}
 }
