@@ -115,7 +115,7 @@ public class ACIPluginProjectAction implements Action, Serializable {
         AbstractBuild<?, ?> lastBuild = project.getLastBuild();
         while (lastBuild != null && (lastBuild.isBuilding()
         		|| lastBuild.getAction(ACIPluginBuildAction.class) == null)) {
-            lastBuild = lastBuild.getPreviousBuild();
+            lastBuild = lastBuild.getPreviousCompletedBuild();
         }
         return lastBuild;
     }
