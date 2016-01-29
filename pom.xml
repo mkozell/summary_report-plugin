@@ -80,7 +80,6 @@
     <connection>scm:git:https://github.com/jenkinsci/summary_report-plugin.git</connection>
     <developerConnection>scm:git:https://github.com/jenkinsci/summary_report-plugin.git</developerConnection>
     <url>https://github.com/jenkinsci/summary_report-plugin</url>
-    <tag>summary_report-1.12</tag>
   </scm>
 
   <properties>
