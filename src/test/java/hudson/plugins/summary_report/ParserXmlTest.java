@@ -54,10 +54,10 @@ public class ParserXmlTest {
     public void test_Error_ParseEmptyFile() throws Exception {
 
         /* Verification of existing file */
-        deleteFiles("/tmp/test_empty_file.xml");
+        String xml_path_empty_file = System.getProperty("java.io.tmpdir") + "/test_empty_file.xml";
+        deleteFiles(xml_path_empty_file);
 
-        String xml_path_empty_file = "/tmp/test_empty_file.xml";
-        FileWriter writer_empty_file = new FileWriter("/tmp/test_empty_file.xml",true);
+        FileWriter writer_empty_file = new FileWriter(xml_path_empty_file,true);
 
         writer_empty_file.write("");
         if (writer_empty_file != null){
@@ -74,10 +74,10 @@ public class ParserXmlTest {
     public void test_Error_ParseTwoSections() throws Exception {
 
         /* Verification of existing file */
-        deleteFiles("/tmp/test_two_sections.xml");
+        String xml_path_two_sections = System.getProperty("java.io.tmpdir") + "/test_two_sections.xml";
+        deleteFiles(xml_path_two_sections);
 
-        String xml_path_two_sections = "/tmp/test_two_sections.xml";
-        FileWriter writer_two_sections = new FileWriter("/tmp/test_two_sections.xml",true);
+        FileWriter writer_two_sections = new FileWriter(xml_path_two_sections,true);
 
         writer_two_sections.write("<section name=\"Section Test\">"
                                 + "</section>"
@@ -98,10 +98,10 @@ public class ParserXmlTest {
     public void test_Error_ParseIncompleteSection() throws Exception {
 
         /* Verification of existing file */
-        deleteFiles("/tmp/test_incomplete_sections.xml");
+        String xml_path_incomplete_sections = System.getProperty("java.io.tmpdir") + "/test_incomplete_sections.xml";
+        deleteFiles(xml_path_incomplete_sections);
 
-        String xml_path_incomplete_sections = "/tmp/test_incomplete_sections.xml";
-        FileWriter writer_incomplete_sections = new FileWriter("/tmp/test_incomplete_sections.xml",true);
+        FileWriter writer_incomplete_sections = new FileWriter(xml_path_incomplete_sections,true);
 
         writer_incomplete_sections.write("<section name=\"Section Test\">"
                                 + "</se");
@@ -120,10 +120,10 @@ public class ParserXmlTest {
     public void test_Error_ParseWrongField() throws Exception {
 
         /* Verification of existing file */
-        deleteFiles("/tmp/test_wrong_field.xml");
+        String xml_path_wrong_field = System.getProperty("java.io.tmpdir") + "/test_wrong_field.xml";
+        deleteFiles(xml_path_wrong_field);
 
-        String xml_path_wrong_field = "/tmp/test_wrong_field.xml";
-        FileWriter writer_wrong_field = new FileWriter("/tmp/test_wrong_field.xml",true);
+        FileWriter writer_wrong_field = new FileWriter(xml_path_wrong_field,true);
 
         writer_wrong_field.write("<section name=\"Section Test\">"
                                + "  <field name=\"TestFie value=\"Test succeeded\"/>"
@@ -144,10 +144,10 @@ public class ParserXmlTest {
     public void test_Error_ParseWrongTable() throws Exception {
 
         /* Verification of existing file */
-        deleteFiles("/tmp/test_wrong_table.xml");
+        String xml_path_wrong_table = System.getProperty("java.io.tmpdir") + "/test_wrong_table.xml";
+        deleteFiles(xml_path_wrong_table);
 
-        String xml_path_wrong_table = "/tmp/test_wrong_table.xml";
-        FileWriter writer_wrong_table = new FileWriter("/tmp/test_wrong_table.xml",true);
+        FileWriter writer_wrong_table = new FileWriter(xml_path_wrong_table,true);
 
         writer_wrong_table.write("<section name=\"Section Test\">"
                                + "  <table>"
@@ -174,10 +174,10 @@ public class ParserXmlTest {
     public void test_Error_ParseWrongAccordion() throws Exception {
 
         /* Verification of existing file */
-        deleteFiles("/tmp/test_wrong_accordion.xml");
+        String xml_path_wrong_accordion = System.getProperty("java.io.tmpdir") + "/test_wrong_accordion.xml";
+        deleteFiles(xml_path_wrong_accordion);
 
-        String xml_path_wrong_accordion = "/tmp/test_wrong_accordion.xml";
-        FileWriter writer_wrong_accordion = new FileWriter("/tmp/test_wrong_accordion.xml",true);
+        FileWriter writer_wrong_accordion = new FileWriter(xml_path_wrong_accordion,true);
 
         writer_wrong_accordion.write("<section name=\"Section Test\">"
                                    + "  <accordion name=\"TestAccordion\">"
@@ -200,10 +200,10 @@ public class ParserXmlTest {
     public void test_Error_ParseWrongTabs() throws Exception {
 
         /* Verification of existing file */
-        deleteFiles("/tmp/test_wrong_tabs.xml");
+        String xml_path_wrong_tabs = System.getProperty("java.io.tmpdir") + "/test_wrong_tabs.xml";
+        deleteFiles(xml_path_wrong_tabs);
 
-        String xml_path_wrong_tabs = "/tmp/test_wrong_tabs.xml";
-        FileWriter writer_wrong_tabs = new FileWriter("/tmp/test_wrong_tabs.xml",true);
+        FileWriter writer_wrong_tabs = new FileWriter(xml_path_wrong_tabs,true);
 
         writer_wrong_tabs.write("<section name=\"Section Test\">"
                               + "  <tabs>"
@@ -244,10 +244,10 @@ public class ParserXmlTest {
     public void test_Pass_ParseField() throws Exception {
 
         /* Verification of existing file */
-        deleteFiles("/tmp/test_field.xml");
+        String xml_path_field = System.getProperty("java.io.tmpdir") + "/test_field.xml";
+        deleteFiles(xml_path_field);
 
-        String xml_path_field = "/tmp/test_field.xml";
-        FileWriter writer_field = new FileWriter("/tmp/test_field.xml",true);
+        FileWriter writer_field = new FileWriter(xml_path_field,true);
 
         writer_field.write("<section name=\"Section Test\">"
                          + "  <field name=\"TestField\" value=\"Test succeeded\"/>"
@@ -268,10 +268,10 @@ public class ParserXmlTest {
     public void test_Pass_ParseTable() throws Exception {
 
         /* Verification of existing file */
-        deleteFiles("/tmp/test_table.xml");
+        String xml_path_table = System.getProperty("java.io.tmpdir") + "/test_table.xml";
+        deleteFiles(xml_path_table);
 
-        String xml_path_table = "/tmp/test_table.xml";
-        FileWriter writer_table = new FileWriter("/tmp/test_table.xml",true);
+        FileWriter writer_table = new FileWriter(xml_path_table,true);
 
         writer_table.write("<section name=\"Section Test\">"
                          + "  <table>"
@@ -300,10 +300,10 @@ public class ParserXmlTest {
     public void test_Pass_ParseAccordion() throws Exception {
 
         /* Verification of existing file */
-        deleteFiles("/tmp/test_accordion.xml");
+        String xml_path_accordion = System.getProperty("java.io.tmpdir") + "/test_accordion.xml";
+        deleteFiles(xml_path_accordion);
 
-        String xml_path_accordion = "/tmp/test_accordion.xml";
-        FileWriter writer_accordion = new FileWriter("/tmp/test_accordion.xml",true);
+        FileWriter writer_accordion = new FileWriter(xml_path_accordion,true);
 
         writer_accordion.write("<section name=\"Section Test\">"
                              + "  <accordion name=\"TestAccordion\">"
@@ -331,10 +331,10 @@ public class ParserXmlTest {
     public void test_Pass_ParseTabs() throws Exception {
 
         /* Verification of existing file */
-        deleteFiles("/tmp/test_tabs.xml");
+        String xml_path_tabs = System.getProperty("java.io.tmpdir") + "/test_tabs.xml";
+        deleteFiles(xml_path_tabs);
 
-        String xml_path_tabs = "/tmp/test_tabs.xml";
-        FileWriter writer_tabs = new FileWriter("/tmp/test_tabs.xml",true);
+        FileWriter writer_tabs = new FileWriter(xml_path_tabs,true);
 
         writer_tabs.write("<section name=\"Section Test\">"
                              + "  <tabs>"
