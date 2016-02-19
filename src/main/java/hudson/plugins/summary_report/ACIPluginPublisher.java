@@ -110,7 +110,7 @@ public class ACIPluginPublisher extends Recorder implements SimpleBuildStep {
 	 * Perform the publication.
 	 * @param build
 	 * 		Build on which to apply publication
-	 * @param workspacePath 
+	 * @param workspacePath
 	 *      Unused
 	 * @param launcher
 	 * 		Unused
@@ -121,7 +121,7 @@ public class ACIPluginPublisher extends Recorder implements SimpleBuildStep {
 	 * @throws InterruptedException
 	 * 		In case of interuption
 	 */
-	public void perform(final Run<?, ?> build, final FilePath workspacePath, 
+	public void perform(final Run<?, ?> build, final FilePath workspacePath,
 			final Launcher launcher, final TaskListener listener)
 			throws InterruptedException, IOException {
 
