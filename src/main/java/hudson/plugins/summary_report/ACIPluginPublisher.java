@@ -23,14 +23,17 @@
  */
 package hudson.plugins.summary_report;
 
+import hudson.AbortException;
+import hudson.FilePath;
 import hudson.Launcher;
-import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.model.Action;
-import hudson.model.BuildListener;
-
+import hudson.model.Run;
+import hudson.model.TaskListener;
 import hudson.tasks.BuildStepMonitor;
 import hudson.tasks.Recorder;
+import jenkins.tasks.SimpleBuildStep;
+
 import java.io.File;
 
 import java.io.IOException;
@@ -48,7 +51,7 @@ import org.xml.sax.SAXException;
  * publishing data over build & project page.
  */
 @SuppressWarnings("unchecked")
-public class ACIPluginPublisher extends Recorder {
+public class ACIPluginPublisher extends Recorder implements SimpleBuildStep {
 
 	/* The list name of the files to parse */
 	private String name;
@@ -107,24 +110,20 @@ public class ACIPluginPublisher extends Recorder {
 	 * Perform the publication.
 	 * @param build
 	 * 		Build on which to apply publication
+	 * @param workspacePath
+	 *      Unused
 	 * @param launcher
 	 * 		Unused
 	 * @param listener
 	 * 		Unused
-	 * @return boolean
-	 * 		true if the publishing successfully complete
-	 * 		true if the publishing could not complete
 	 * @throws IOException
 	 * 		In case of file IO mismatch
 	 * @throws InterruptedException
 	 * 		In case of interuption
 	 */
-	@Override
-	public boolean perform(
-			final AbstractBuild<?, ?> build,
-			final Launcher launcher,
-			final BuildListener listener)
-					throws IOException, InterruptedException {
+	public void perform(final Run<?, ?> build, final FilePath workspacePath,
+			final Launcher launcher, final TaskListener listener)
+			throws InterruptedException, IOException {
 
 		/**
 		 * Define if we must parse multiple file by searching for ','
@@ -146,7 +145,7 @@ public class ACIPluginPublisher extends Recorder {
 					.getIncludedFiles();
 			} catch (Exception ex) {
 				listener.getLogger().println(ex.toString());
-				return false;
+				throw new AbortException(ex.getMessage());
 			}
 			for (int j = 0; j < tmpFiles.length; j++) {
 				filesToParse.add(tmpFiles[j]);
@@ -160,15 +159,14 @@ public class ACIPluginPublisher extends Recorder {
 			build.addAction(buildAction);
 		} catch (ParserConfigurationException ex) {
 			listener.getLogger().println(ex.toString());
-            return false;
+			throw new AbortException(ex.getMessage());
 		} catch (SAXException ex) {
 			listener.getLogger().println(ex.toString());
-            return false;
+			throw new AbortException(ex.getMessage());
 		} catch (URISyntaxException ex) {
 			listener.getLogger().println(ex.toString());
-            return false;
+			throw new AbortException(ex.getMessage());
 		}
-		return true;
 	}
 
 	/**

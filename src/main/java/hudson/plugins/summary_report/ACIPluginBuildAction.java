@@ -24,7 +24,7 @@
 package hudson.plugins.summary_report;
 
 import hudson.model.Action;
-import hudson.model.AbstractBuild;
+import hudson.model.Run;
 import hudson.plugins.summary_report.report.Report;
 import java.io.File;
 import java.io.IOException;
@@ -51,7 +51,7 @@ public class ACIPluginBuildAction implements Action,
 	 * URL to access data.
 	 */
 	public static final String URL_NAME = "aciResult";
-	private AbstractBuild<?, ?> build;
+	private Run<?, ?> build;
 	private String result;
 	private Report report;
 	private ArrayList<ArrayList<String>> fileError;
@@ -74,7 +74,7 @@ public class ACIPluginBuildAction implements Action,
 	 * @throws IOException
 	 *             Exception with I/Os
 	 */
-	public ACIPluginBuildAction(final AbstractBuild<?, ?> build,
+	public ACIPluginBuildAction(final Run<?, ?> build,
 			final ArrayList<String> files) throws InterruptedException,
 			ParserConfigurationException, SAXException, URISyntaxException,
 			IOException {
@@ -159,7 +159,7 @@ public class ACIPluginBuildAction implements Action,
 	/**
 	 * Get current build.
 	 */
-	AbstractBuild<?, ?> getBuild() {
+	Run<?, ?> getBuild() {
 		return this.build;
 	}
 
@@ -186,7 +186,7 @@ public class ACIPluginBuildAction implements Action,
 	 * Get Previous action.
 	 */
 	ACIPluginBuildAction getPreviousAction() {
-		AbstractBuild<?, ?> previousBuild = this.build.getPreviousBuild();
+		Run<?, ?> previousBuild = this.build.getPreviousBuild();
 		if (previousBuild != null) {
 			return previousBuild.getAction(ACIPluginBuildAction.class);
 		}
