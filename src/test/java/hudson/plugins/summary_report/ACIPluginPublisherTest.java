@@ -24,13 +24,16 @@
 package hudson.plugins.summary_report;
 
 
+import hudson.FilePath;
+import hudson.Launcher;
 import hudson.model.*;
 import hudson.tasks.ArtifactArchiver;
-import hudson.tasks.Shell;
+import hudson.tasks.Builder;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import org.jvnet.hudson.test.HudsonTestCase;
+import org.jvnet.hudson.test.TestBuilder;
 
 /**
  *
@@ -54,7 +57,7 @@ public class ACIPluginPublisherTest  extends HudsonTestCase{
         FreeStyleProject project = createFreeStyleProject("ProjectTestBuild");
         /* Verification if ProjectTestBuild is created */
         assertNotNull(project.getAllJobs());
-        assertEquals(1,  project.getAllJobs().toArray().length);
+        assertEquals(1,  project.getAllJobs().size());
 
         /* Add ArtifactArchiver publisher */
         ArtifactArchiver archiver = new ArtifactArchiver("*.xml", "", true);
@@ -68,12 +71,20 @@ public class ACIPluginPublisherTest  extends HudsonTestCase{
         assertEquals(2, project.getPublishersList().size());
 
         /* Create files to archive */
-        project.getBuildersList().add(
-                new Shell("rm -rf *;"
-                        + "echo  \"  <section name=\\\"Session1\\\">\n"
-                        + "             <field name=\\\"Field1\\\" value=\\\"Field1 succeeded\\\"/>\n"
-                        + "          </section>"
-                        + "\" >> junit1.xml;"));
+        Builder test = new TestBuilder() {
+
+			@Override
+			public boolean perform(AbstractBuild<?, ?> build, Launcher launcher, BuildListener listener)
+					throws InterruptedException, IOException {
+				FilePath workspace = build.getWorkspace();
+				workspace.deleteContents();
+				workspace.child("junit1.xml").write("<section name=\"Session1\">\n"
+						+ "   <field name=\"Field1\" value=\"Field1 succeeded\"/>\n"
+						+ "</section>", "UTF-8");
+				return true;
+			}
+		};
+        project.getBuildersList().add(test);
 
         /* Build the ProjectTestBuild */
         FreeStyleBuild build = project.scheduleBuild2(0).get();
