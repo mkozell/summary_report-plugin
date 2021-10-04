@@ -1,3 +1,4 @@
+<?jelly escape-by-default='false'?>
 <div>
   This plugin show ACI reports.
 </div>
